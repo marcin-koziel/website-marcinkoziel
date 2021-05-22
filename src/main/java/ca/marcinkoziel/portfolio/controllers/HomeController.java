@@ -16,7 +16,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.*;
@@ -27,13 +26,11 @@ public class HomeController {
     @Autowired
     private MailService mailService;
 
-    @GetMapping("/")
+    @GetMapping({"/", "/home", "experience", "projects"})
     public String goIndex(Model model){
 
-        List<Project> projects = new ArrayList<Project>();
-        List<Experience> experiences = new ArrayList<Experience>();
-
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyy");
+        List<Project> projects = new ArrayList<>();
+        List<Experience> experiences = new ArrayList<>();
 
         projects.add(
                 Project.builder()
@@ -81,37 +78,13 @@ public class HomeController {
         return "index";
     }
 
-    @GetMapping("/home")
-    public String goHome(){
-
-        return "redirect:/";
-    }
-
-    @GetMapping("/experience")
-    public String goExperience(){
-
-        return "index";
-    }
-
-    @GetMapping("/aboutme")
-    public String goToAboutMe(){
-
-        return "index";
-    }
-
-    @GetMapping("/projects")
-    public String goToProjects(){
-
-        return "index";
-    }
-
     @GetMapping("/contact")
     public String goToContact(ContactForm contactForm, Model model){
 
         model.addAttribute("contactFrom", contactForm);
 
         return "contact";
-    }
+    };
 
     @PostMapping("/contact/send")
     public String send(@ModelAttribute ContactForm contactForm){
@@ -135,7 +108,7 @@ public class HomeController {
         }
 
         return "redirect:/";
-    }
+    };
 
     @RequestMapping(value = "/resume", method = RequestMethod.GET, produces = "application/pdf")
     public ResponseEntity<InputStreamResource> downloadPdf() throws IOException {
@@ -151,15 +124,8 @@ public class HomeController {
         headers.add("Expires", "0");
 
         headers.setContentLength(pdfFile.contentLength());
-        ResponseEntity<InputStreamResource> response = new ResponseEntity<InputStreamResource>(
+        return new ResponseEntity<InputStreamResource>(
                 new InputStreamResource(pdfFile.getInputStream()), headers, HttpStatus.OK);
-        return response;
-    }
-
-//    @GetMapping("/games")
-//    public String goToJavaScript(){
-//        return "redirect:http://koziel.dev.fast.sheridanc.on.ca";
-//    }
+    };
 
 }
-
