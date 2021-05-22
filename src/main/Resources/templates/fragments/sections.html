@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+
+<div th:fragment="about" class="about section">
+    <div class="contents">
+        <div class="row">
+            <div class="text">
+                <h3 class="title">About me</h3>
+                <p>
+                    &nbsp;&nbsp;&nbsp;&nbsp;I am a software development and network engineering student interested in
+                    object-oriented programming, machine learning, database architecture, and web development.
+                    I aim to focus on the urgency of accomplishment to the development of new and innovative
+                    applications and platforms.
+                </p>
+                <p class="quote">
+                    <span>"Be ashamed to die before you have won some victory for humanity."</span>
+                    <span>- Horace Mann</span>
+                </p>
+            </div>
+            <div class="about-images">
+                <svg th:replace="fragments/scalable-vector-graphics :: about-categories"></svg>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="experience" class="experience section">
+    <div class="contents">
+        <h3 class="title">Experience</h3>
+        <div class="list">
+            <div class="container" th:each="experience : ${experienceList}">
+                <div class="row">
+                    <img src="#" th:src="${experience.logoPath}" alt="Inovex Logo"/>
+                    <a href="#" th:src="${experience.companyLink}">
+                        <h3 th:text="${experience.title}">Title</h3>
+                        <h4 th:text="${experience.companyName}">Company</h4>
+                        <h4 th:text="'Dates Employed: '+${#temporals.format(experience.fromDate, 'MMM yyyy')}+' to '+ ${#temporals.format(experience.toDate, 'MMM yyyy')}">
+                            Dates Employed: From Date –  To Date
+                        </h4>
+                        <h4 th:text="'Employment Duration: '+${experience.dateDuration}+' months'">Employment Duration: # months</h4>
+                    </a>
+                </div>
+                <hr>
+                <div>
+                    <ul>
+                        <li th:each="bullet : ${experience.bulletPoints}">
+                            <span th:text="${bullet}">Text Text Text Text Text Text Text Text Text Text Text Text</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="projects" class="projects section">
+    <div class="contents">
+        <h3 class="title">Featured Projects</h3>
+        <div class="list">
+
+            <div class="item" th:each="project : ${projectList}">
+                <div class="overlay">
+                    <div class="text-container">
+                        <div class="text-background">
+                            <h2 th:text="${project.title}">Title</h2>
+                            <a class="row lnk-btn" href="https://www.linkedin.com/in/marcin-koziel">
+                                <h4>by Marcin Koziel</h4>
+                                <img class="lnk-img" src="/images/linkedin.png" alt="linkedin logo">
+                            </a>
+                            <a class="row git-btn" href="#" th:href="${project.linkGithub}">
+                                <h4>View on GitHub</h4>
+                                <img class="git-img" src="/images/github.png" alt="github logo">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <img class="item-img" src="#" th:src="@{images/} + ${project.image}" />
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

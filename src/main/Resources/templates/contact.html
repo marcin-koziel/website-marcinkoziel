@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="description"
+          content="Contact page for Marcin Koziel. Send an email through the provided form such as name, email, subject
+            reason, and a message.">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link th:href="@{/styles/css/stylesheet.css?v=0.1.9}" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=BenchNine:wght@400&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="#" th:href="@{/images/favicon.png}">
+    <title>Marcin Koziel - Contact</title>
+</head>
+<body>
+
+<nav th:replace="fragments/navigation :: default"></nav>
+
+<div class="contact">
+    <div class="container">
+        <h2 class="title">Send me an email</h2>
+        <form action="#" th:action="@{/contact/send}" th:object="${contactFrom}" method="post">
+            <div>
+                <h3>Name</h3>
+                <input type="text" th:field="*{name}" required
+                       pattern="^(?=.{1,25}$)[a-zA-Z ]+(?:[-'\s][a-zA-Z]+)*$"
+                       title="Please enter a valid name.  (max. 25 characters)">
+            </div>
+            <div>
+                <h3>Email address</h3>
+                <input type="text" th:field="*{email}" required
+                       pattern="\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b"
+                       title="Please enter a valid email.">
+            </div>
+            <div>
+                <h3>Subject</h3>
+                <input type="text" th:field="*{subject}" required
+                       pattern="^(?=.{1,60}$)[a-zA-Z0-9 ,.!?]+(?:[-'\s][a-zA-Z]+)*$"
+                       title="Please enter a valid subject. (max. 60 characters)">
+            </div>
+            <div>
+                <h3>Reason</h3>
+                <select th:field="*{reason}">
+                    <option th:each="reason : *{reasons}" th:value="${reason}" th:text="${reason}">Option</option>
+                </select>
+            </div>
+            <div>
+                <h3>Message</h3>
+                <textarea rows="6" cols="10" th:field="*{message}" required
+                          pattern="^(?=.{1,250}$)[a-zA-Z0-9 ,.!?]+(?:[-'\s][a-zA-Z]+)*$"
+                          title="Please enter a valid message. (max. 250 characters)"></textarea>
+            </div>
+            <div class="submit">
+                <input type="submit" value="Send">
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="/js/menu.js"></script>
+<script>
+    $(".nav").ready( () => {
+        const menu = new Menu(".menu", ".nav", ".contents", ["Home", "Experience", "Projects", "Resume", "Contact"])
+        menu.setListener();
+        menu.invertColor();
+    });
+</script>
+
+</body>
+</html>

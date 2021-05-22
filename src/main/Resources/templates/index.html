@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="description"
+          content="My name is Marcin Koziel. I am a software development and network engineering student interested in
+          object-oriented programming, machine learning, databases, and web development. I aim to focus on the urgency
+          of accomplishment to the development of new and innovative applications and platforms.">
+    <link th:href="@{/styles/css/stylesheet.css?v=0.1.9}" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=BenchNine:wght@400&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="#" th:href="@{/images/favicon.png}">
+    <title>Marcin Koziel</title>
+</head>
+<body>
+
+<div th:replace="fragments/navigation :: default"></div>
+
+<div class="sub">
+
+    <div class="dim-top-left"></div>
+    <div class="wrapper">
+        <img id="bg" class="noselect rellax" src="/images/header_background.jpg" alt="portrait blurred" data-rellax-speed="2">
+    </div>
+
+    <svg th:replace="fragments/scalable-vector-graphics :: sub-mask"></svg>
+
+    <div class="contents">
+        <img id="marcin" class="noselect rellax" src="/images/marcin.png" alt="portrait blurred" data-rellax-speed="-1">
+        <div id="title">
+            <a>Software Engineer.</a>
+        </div>
+    </div>
+
+    <div id="lets-talk" th:href="@{/contact}" class="lets-animate">
+        <a>Let's Talk</a>
+    </div>
+</div>
+
+<div th:replace="fragments/sections :: about"></div>
+
+<div th:replace="fragments/sections :: experience"></div>
+
+<div th:replace="fragments/sections :: projects"></div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/dixonandmoe/rellax@master/rellax.min.js"></script>
+<script src="/js/position.js"></script>
+<script src="/js/section.js"></script>
+<script src="/js/animateButton.js"></script>
+<script src="/js/menu.js"></script>
+<script src="/js/script.js"></script>
+
+</body>
+</html>
